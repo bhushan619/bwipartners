@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CardgoalRouteImport } from './routes/cardgoal'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as SwapRouteImport } from './routes/swap'
+import { Route as TransactionIdRouteImport } from './routes/transaction.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CardgoalRoute = CardgoalRouteImport.update({
+  id: '/cardgoal',
+  path: '/cardgoal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SwapRoute = SwapRouteImport.update({
+  id: '/swap',
+  path: '/swap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionIdRoute = TransactionIdRouteImport.update({
+  id: '/transaction/$id',
+  path: '/transaction/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cardgoal': typeof CardgoalRoute
+  '/history': typeof HistoryRoute
+  '/home': typeof HomeRoute
+  '/swap': typeof SwapRoute
+  '/transaction/$id': typeof TransactionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cardgoal': typeof CardgoalRoute
+  '/history': typeof HistoryRoute
+  '/home': typeof HomeRoute
+  '/swap': typeof SwapRoute
+  '/transaction/$id': typeof TransactionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cardgoal': typeof CardgoalRoute
+  '/history': typeof HistoryRoute
+  '/home': typeof HomeRoute
+  '/swap': typeof SwapRoute
+  '/transaction/$id': typeof TransactionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/cardgoal' | '/history' | '/home' | '/swap' | '/transaction/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cardgoal' | '/history' | '/home' | '/swap' | '/transaction/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/cardgoal'
+    | '/history'
+    | '/home'
+    | '/swap'
+    | '/transaction/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CardgoalRoute: typeof CardgoalRoute
+  HistoryRoute: typeof HistoryRoute
+  HomeRoute: typeof HomeRoute
+  SwapRoute: typeof SwapRoute
+  TransactionIdRoute: typeof TransactionIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +106,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cardgoal': {
+      id: '/cardgoal'
+      path: '/cardgoal'
+      fullPath: '/cardgoal'
+      preLoaderRoute: typeof CardgoalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/swap': {
+      id: '/swap'
+      path: '/swap'
+      fullPath: '/swap'
+      preLoaderRoute: typeof SwapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transaction/$id': {
+      id: '/transaction/$id'
+      path: '/transaction/$id'
+      fullPath: '/transaction/$id'
+      preLoaderRoute: typeof TransactionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CardgoalRoute: CardgoalRoute,
+  HistoryRoute: HistoryRoute,
+  HomeRoute: HomeRoute,
+  SwapRoute: SwapRoute,
+  TransactionIdRoute: TransactionIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
