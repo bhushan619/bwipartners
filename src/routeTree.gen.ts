@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BwiAdminRouteImport } from './routes/bwi-admin'
+import { Route as SaasRouteImport } from './routes/saas'
+import { Route as UserFlowRouteImport } from './routes/user-flow'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BwiAdminRoute = BwiAdminRouteImport.update({
+  id: '/bwi-admin',
+  path: '/bwi-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaasRoute = SaasRouteImport.update({
+  id: '/saas',
+  path: '/saas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserFlowRoute = UserFlowRouteImport.update({
+  id: '/user-flow',
+  path: '/user-flow',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/bwi-admin' | '/saas' | '/user-flow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/bwi-admin' | '/saas' | '/user-flow'
+  id: '__root__' | '/' | '/bwi-admin' | '/saas' | '/user-flow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BwiAdminRoute: typeof BwiAdminRoute
+  SaasRoute: typeof SaasRoute
+  UserFlowRoute: typeof UserFlowRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bwi-admin': {
+      id: '/bwi-admin'
+      path: '/bwi-admin'
+      fullPath: '/bwi-admin'
+      preLoaderRoute: typeof BwiAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saas': {
+      id: '/saas'
+      path: '/saas'
+      fullPath: '/saas'
+      preLoaderRoute: typeof SaasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user-flow': {
+      id: '/user-flow'
+      path: '/user-flow'
+      fullPath: '/user-flow'
+      preLoaderRoute: typeof UserFlowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BwiAdminRoute: BwiAdminRoute,
+  SaasRoute: SaasRoute,
+  UserFlowRoute: UserFlowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
