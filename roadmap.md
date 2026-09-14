@@ -19,3 +19,4 @@
 - [x] Rename Connection overview to Partner Linking
 - [x] Move connection management into a modal
 - [x] Replace currency and placement fields with a deeplink URL
+- [x] Remove the Matrix Apps screen from SaaS Admin
