@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, CheckCircle2, ChevronRight, Pencil, Plus, Save, Settings2, X } from "lucide-react";
+import { Check, CheckCircle2, ChevronRight, ImageIcon, Pencil, Plus, Save, Settings2, Upload, X } from "lucide-react";
 import { useState } from "react";
 import { AdminShell, Button } from "@/components/BwiUi";
 import { useBwi, type PartnerConfig } from "@/lib/bwi-store";
@@ -53,7 +53,7 @@ function BwiAdmin() {
   const [editingRow, setEditingRow] = useState<ExchangeRow | null>(null);
 
   const openModal = () => {
-    setForm({ name: "", code: "", currency: "NGN", brandingLabel: "", enabled: true });
+    setForm({ name: "", code: "", currency: "NGN", brandingLabel: "", enabled: true, logo: "", loginUrl: "" });
     setModalOpen(true);
   };
 
