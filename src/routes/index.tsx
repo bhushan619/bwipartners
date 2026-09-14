@@ -1,96 +1,97 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { CreditCard, ShieldCheck, TrendingUp } from "lucide-react";
-import { useEffect } from "react";
-import { PhoneShell } from "@/components/PhoneShell";
-import { useCobit } from "@/lib/cobit-store";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, Building2, PanelsTopLeft, Smartphone } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cobit — Sign in" },
+      { title: "BWI Prototype — Partner Wallet Infrastructure" },
       {
         name: "description",
         content:
-          "Sign in to Cobit with your Cardgoal account and swap Naira to USDT instantly.",
+          "Explore the BWI user wallet, partner administration, and SaaS connection journeys.",
       },
-      { property: "og:title", content: "Cobit — Sign in" },
+      { property: "og:title", content: "BWI Prototype — Partner Wallet Infrastructure" },
       {
         property: "og:description",
         content:
-          "Sign in to Cobit with your Cardgoal account and swap Naira to USDT instantly.",
+          "Explore the BWI user wallet, partner administration, and SaaS connection journeys.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: LoginPage,
+  component: PrototypeHome,
 });
 
-function LoginPage() {
-  const { authed, loginWithCardgoal } = useCobit();
-  const navigate = useNavigate();
+const sections = [
+  {
+    to: "/user-flow" as const,
+    number: "01",
+    title: "User Flow",
+    description: "Walk through the partner wallet, USDT swap, login and completion experience.",
+    icon: Smartphone,
+    label: "Mobile journey",
+  },
+  {
+    to: "/bwi-admin" as const,
+    number: "02",
+    title: "BWI Admin",
+    description: "Create a partner, configure rates and review partner-level operations.",
+    icon: Building2,
+    label: "BWI configuration",
+  },
+  {
+    to: "/saas" as const,
+    number: "03",
+    title: "SaaS Business Module",
+    description: "Enable BWI for matrix apps and monitor connections across the platform.",
+    icon: PanelsTopLeft,
+    label: "Partner-side connection",
+  },
+];
 
-  useEffect(() => {
-    if (authed) void navigate({ to: "/home" });
-  }, [authed, navigate]);
-
+function PrototypeHome() {
   return (
-    <PhoneShell>
-      <div className="flex flex-1 flex-col px-6 pb-10 pt-16">
-        <div className="rise-in">
-          <div className="flex size-14 items-center justify-center rounded-2xl bg-primary">
-            <TrendingUp className="size-7 text-primary-foreground" />
+    <main className="min-h-screen bg-background">
+      <div className="border-b border-border">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-8">
+          <div className="flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-md bg-navy text-xs font-black text-navy-foreground">BWI</span>
+            <span className="font-display text-sm font-bold">Partner Wallet Infrastructure</span>
           </div>
-          <h1 className="mt-6 font-display text-3xl font-bold tracking-tight">
-            Welcome to Cobit
-          </h1>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Trade crypto with ease. Connect your Cardgoal account to turn your
-            Naira balance into stable USDT.
-          </p>
-        </div>
-
-        <div className="rise-in mt-10 space-y-3" style={{ animationDelay: "80ms" }}>
-          <div className="card-surface flex items-center gap-3 p-4">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-mint text-primary">
-              <CreditCard className="size-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Cardgoal balance, ready</p>
-              <p className="text-xs text-muted-foreground">
-                Your withdrawable Naira shows up automatically
-              </p>
-            </div>
-          </div>
-          <div className="card-surface flex items-center gap-3 p-4">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-              <ShieldCheck className="size-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Secure swap to USDT</p>
-              <p className="text-xs text-muted-foreground">
-                Recorded on both Cobit and Cardgoal
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-auto space-y-3 pt-10">
-          <button
-            onClick={() => {
-              loginWithCardgoal();
-              void navigate({ to: "/home" });
-            }}
-            className="btn-press flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-4 font-display text-base font-semibold text-primary-foreground shadow-lg"
-          >
-            <CreditCard className="size-5" />
-            Login with Cardgoal
-          </button>
-          <p className="text-center text-xs text-muted-foreground">
-            Demo build — balances and rates are sample data.
-          </p>
+          <span className="rounded-full border border-border bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">Clickable prototype</span>
         </div>
       </div>
-    </PhoneShell>
+      <section className="mx-auto max-w-6xl px-6 pb-16 pt-16 lg:px-8 lg:pt-24">
+        <div className="max-w-3xl">
+          <p className="mb-4 text-xs font-bold uppercase text-primary">Configuration, not development</p>
+          <h1 className="font-display text-4xl font-extrabold leading-tight text-navy sm:text-6xl">
+            Connect any partner wallet to USDT.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+            See how BWI creates the partner connection, how the matrix app enables it, and what users experience once it is live.
+          </p>
+        </div>
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {sections.map(({ to, number, title, description, icon: Icon, label }) => (
+            <Link key={to} to={to} className="group flex min-h-72 flex-col rounded-lg border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:border-navy/25 hover:shadow-frame">
+              <div className="flex items-start justify-between">
+                <span className="text-xs font-bold text-muted-foreground">{number}</span>
+                <span className="flex size-11 items-center justify-center rounded-lg bg-navy/5 text-navy"><Icon className="size-5" /></span>
+              </div>
+              <div className="mt-auto">
+                <p className="text-xs font-semibold text-primary">{label}</p>
+                <h2 className="mt-2 font-display text-2xl font-bold text-navy">{title}</h2>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-navy">Open section <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-8 flex items-center gap-3 border-l-2 border-primary pl-4 text-sm text-muted-foreground">
+          <span className="font-semibold text-foreground">One shared connection.</span> Partner code links the BWI and SaaS configuration.
+        </div>
+      </section>
+    </main>
   );
 }

@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { CobitProvider } from "../lib/cobit-store";
+import { BwiProvider } from "../lib/bwi-store";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -78,18 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Cobit — Swap Naira to USDT" },
+      { title: "BWI — Partner Wallet Infrastructure" },
       {
         name: "description",
         content:
-          "Cobit lets Cardgoal users convert their Naira balance to USDT instantly.",
+          "BWI connects partner wallets to USDT swaps, withdrawals, and configurable administration.",
       },
-      { name: "author", content: "Cobit" },
-      { property: "og:title", content: "Cobit — Swap Naira to USDT" },
+      { name: "author", content: "BWI" },
+      { property: "og:title", content: "BWI — Partner Wallet Infrastructure" },
       {
         property: "og:description",
         content:
-          "Cobit lets Cardgoal users convert their Naira balance to USDT instantly.",
+          "BWI connects partner wallets to USDT swaps, withdrawals, and configurable administration.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -103,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -133,10 +133,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CobitProvider>
+      <BwiProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
-      </CobitProvider>
+      </BwiProvider>
     </QueryClientProvider>
   );
 }

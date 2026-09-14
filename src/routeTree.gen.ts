@@ -10,91 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CardgoalRouteImport } from './routes/cardgoal'
-import { Route as HistoryRouteImport } from './routes/history'
-import { Route as HomeRouteImport } from './routes/home'
-import { Route as SwapRouteImport } from './routes/swap'
-import { Route as TransactionIdRouteImport } from './routes/transaction.$id'
+import { Route as BwiAdminRouteImport } from './routes/bwi-admin'
+import { Route as SaasRouteImport } from './routes/saas'
+import { Route as UserFlowRouteImport } from './routes/user-flow'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CardgoalRoute = CardgoalRouteImport.update({
-  id: '/cardgoal',
-  path: '/cardgoal',
+const BwiAdminRoute = BwiAdminRouteImport.update({
+  id: '/bwi-admin',
+  path: '/bwi-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HistoryRoute = HistoryRouteImport.update({
-  id: '/history',
-  path: '/history',
+const SaasRoute = SaasRouteImport.update({
+  id: '/saas',
+  path: '/saas',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeRoute = HomeRouteImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SwapRoute = SwapRouteImport.update({
-  id: '/swap',
-  path: '/swap',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TransactionIdRoute = TransactionIdRouteImport.update({
-  id: '/transaction/$id',
-  path: '/transaction/$id',
+const UserFlowRoute = UserFlowRouteImport.update({
+  id: '/user-flow',
+  path: '/user-flow',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/cardgoal': typeof CardgoalRoute
-  '/history': typeof HistoryRoute
-  '/home': typeof HomeRoute
-  '/swap': typeof SwapRoute
-  '/transaction/$id': typeof TransactionIdRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/cardgoal': typeof CardgoalRoute
-  '/history': typeof HistoryRoute
-  '/home': typeof HomeRoute
-  '/swap': typeof SwapRoute
-  '/transaction/$id': typeof TransactionIdRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/cardgoal': typeof CardgoalRoute
-  '/history': typeof HistoryRoute
-  '/home': typeof HomeRoute
-  '/swap': typeof SwapRoute
-  '/transaction/$id': typeof TransactionIdRoute
+  '/bwi-admin': typeof BwiAdminRoute
+  '/saas': typeof SaasRoute
+  '/user-flow': typeof UserFlowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    '/' | '/cardgoal' | '/history' | '/home' | '/swap' | '/transaction/$id'
+  fullPaths: '/' | '/bwi-admin' | '/saas' | '/user-flow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cardgoal' | '/history' | '/home' | '/swap' | '/transaction/$id'
-  id:
-    | '__root__'
-    | '/'
-    | '/cardgoal'
-    | '/history'
-    | '/home'
-    | '/swap'
-    | '/transaction/$id'
+  to: '/' | '/bwi-admin' | '/saas' | '/user-flow'
+  id: '__root__' | '/' | '/bwi-admin' | '/saas' | '/user-flow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CardgoalRoute: typeof CardgoalRoute
-  HistoryRoute: typeof HistoryRoute
-  HomeRoute: typeof HomeRoute
-  SwapRoute: typeof SwapRoute
-  TransactionIdRoute: typeof TransactionIdRoute
+  BwiAdminRoute: typeof BwiAdminRoute
+  SaasRoute: typeof SaasRoute
+  UserFlowRoute: typeof UserFlowRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,39 +78,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cardgoal': {
-      id: '/cardgoal'
-      path: '/cardgoal'
-      fullPath: '/cardgoal'
-      preLoaderRoute: typeof CardgoalRouteImport
+    '/bwi-admin': {
+      id: '/bwi-admin'
+      path: '/bwi-admin'
+      fullPath: '/bwi-admin'
+      preLoaderRoute: typeof BwiAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/history': {
-      id: '/history'
-      path: '/history'
-      fullPath: '/history'
-      preLoaderRoute: typeof HistoryRouteImport
+    '/saas': {
+      id: '/saas'
+      path: '/saas'
+      fullPath: '/saas'
+      preLoaderRoute: typeof SaasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/swap': {
-      id: '/swap'
-      path: '/swap'
-      fullPath: '/swap'
-      preLoaderRoute: typeof SwapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/transaction/$id': {
-      id: '/transaction/$id'
-      path: '/transaction/$id'
-      fullPath: '/transaction/$id'
-      preLoaderRoute: typeof TransactionIdRouteImport
+    '/user-flow': {
+      id: '/user-flow'
+      path: '/user-flow'
+      fullPath: '/user-flow'
+      preLoaderRoute: typeof UserFlowRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -146,11 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CardgoalRoute: CardgoalRoute,
-  HistoryRoute: HistoryRoute,
-  HomeRoute: HomeRoute,
-  SwapRoute: SwapRoute,
-  TransactionIdRoute: TransactionIdRoute,
+  BwiAdminRoute: BwiAdminRoute,
+  SaasRoute: SaasRoute,
+  UserFlowRoute: UserFlowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
