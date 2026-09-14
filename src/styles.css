@@ -46,6 +46,12 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-login-surface: var(--login-surface);
+  --color-login-navy: var(--login-navy);
+  --color-login-cyan: var(--login-cyan);
+  --color-login-blue: var(--login-blue);
+  --color-login-blue-foreground: var(--login-blue-foreground);
+  --color-login-partner: var(--login-partner);
 }
 
 @theme {
@@ -53,6 +59,7 @@
   --font-display: "Manrope", "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: 0 1px 2px oklch(0.24 0.04 263 / 0.05), 0 8px 24px -18px oklch(0.24 0.04 263 / 0.18);
   --shadow-frame: 0 24px 60px -24px oklch(0.2 0.08 263 / 0.22);
+  --shadow-login-button: 0 10px 22px -12px oklch(0.58 0.2 252 / 0.55);
 }
 
 :root {
@@ -86,6 +93,12 @@
   --tbay: oklch(0.62 0.16 75);
   --bwi-blue: oklch(0.58 0.2 252);
   --bwi-blue-foreground: oklch(0.99 0 0);
+  --login-surface: oklch(0.982 0.009 255);
+  --login-navy: oklch(0.24 0.09 273);
+  --login-cyan: oklch(0.79 0.15 190);
+  --login-blue: oklch(0.58 0.2 252);
+  --login-blue-foreground: oklch(0.99 0 0);
+  --login-partner: oklch(0.61 0.19 275);
 }
 
 @layer base {
