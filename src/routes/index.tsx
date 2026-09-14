@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Building2, PanelsTopLeft, Smartphone } from "lucide-react";
+import { ArrowUpRight, Building2, PanelsTopLeft, Smartphone, WalletCards } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,24 +25,32 @@ export const Route = createFileRoute("/")({
 
 const sections = [
   {
-    to: "/user-flow" as const,
+    to: "/partner-flow" as const,
     number: "01",
-    title: "User Flow",
-    description: "Walk through the partner wallet, USDT swap, login and completion experience.",
+    title: "Partner App User Flow",
+    description: "Start in the partner wallet, withdraw a balance, and review the resulting transaction.",
+    icon: WalletCards,
+    label: "Partner experience",
+  },
+  {
+    to: "/user-flow" as const,
+    number: "02",
+    title: "BWI User Flow",
+    description: "Continue into BWI to review protection, swap local currency, sign in and complete.",
     icon: Smartphone,
-    label: "Mobile journey",
+    label: "BWI experience",
   },
   {
     to: "/bwi-admin" as const,
-    number: "02",
+    number: "03",
     title: "BWI Admin",
-    description: "Create a partner, configure rates and review partner-level operations.",
+    description: "Manage partner configurations and review partner-level operations.",
     icon: Building2,
     label: "BWI configuration",
   },
   {
     to: "/saas" as const,
-    number: "03",
+    number: "04",
     title: "SaaS Business Module",
     description: "Enable BWI for matrix apps and monitor connections across the platform.",
     icon: PanelsTopLeft,
@@ -72,7 +80,7 @@ function PrototypeHome() {
             See how BWI creates the partner connection, how the matrix app enables it, and what users experience once it is live.
           </p>
         </div>
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
           {sections.map(({ to, number, title, description, icon: Icon, label }) => (
             <Link key={to} to={to} className="group flex min-h-72 flex-col rounded-lg border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:border-navy/25 hover:shadow-frame">
               <div className="flex items-start justify-between">
