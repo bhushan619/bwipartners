@@ -5,7 +5,7 @@
 - [x] Rename Rates Management to Partner Configurations
 - [x] Add modal-based partner creation
 - [x] Verify routes, interactions, and responsive layouts
-- [ ] Rename the partner transaction to “Naira swapped successfully”
-- [ ] Reorder BWI flow to login → home → swap → completion → home
-- [ ] Add a partner-home banner linking to BWI login
-- [ ] Verify the updated mobile journey
+- [x] Rename the partner transaction to “Naira swapped successfully”
+- [x] Reorder BWI flow to login → home → swap → completion → home
+- [x] Add a partner-home banner linking to BWI login
+- [x] Verify the updated mobile journey
