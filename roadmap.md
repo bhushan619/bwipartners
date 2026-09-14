@@ -20,5 +20,5 @@
 - [x] Move connection management into a modal
 - [x] Replace currency and placement fields with a deeplink URL
 - [x] Remove the Matrix Apps screen from SaaS Admin
-- [x] Add BWI Transactions to SaaS Admin with filters and mock records
+- [x] Add Partner Transactions to SaaS Admin with filters and mock records
 - [x] Redesign the BWI sign-in screen from the supplied mobile reference
