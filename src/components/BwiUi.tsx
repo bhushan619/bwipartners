@@ -43,7 +43,7 @@ export function BackLink({ to = "/", label = "Back" }: { to?: "/"; label?: strin
 export function MobileFrame({ children }: { children: ReactNode }) {
   return (
     <main className="min-h-screen bg-muted px-4 py-6 sm:py-10">
-      <div className="mx-auto flex min-h-[760px] w-full max-w-[420px] flex-col overflow-hidden rounded-[28px] border border-border bg-background shadow-frame">
+      <div className="relative mx-auto flex min-h-[760px] w-full max-w-[420px] flex-col overflow-hidden rounded-[28px] border border-border bg-background shadow-frame">
         {children}
       </div>
     </main>
