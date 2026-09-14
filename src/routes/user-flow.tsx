@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowLeft, Bell, Bitcoin, Check, ChevronRight, CircleDollarSign, Eye, Gem, Home, LockKeyhole, ReceiptText, RefreshCw, WalletCards } from "lucide-react";
+import { ArrowDown, ArrowLeft, Bell, Bitcoin, Check, ChevronRight, CircleDollarSign, Eye, EyeOff, Gem, Home, LockKeyhole, Mail, ReceiptText, RefreshCw, WalletCards } from "lucide-react";
 import { useState } from "react";
 import { Button, MobileFrame } from "@/components/BwiUi";
 import { useBwi } from "@/lib/bwi-store";
@@ -30,18 +30,23 @@ function BwiUserFlow() {
   if (screen === "login") {
     return (
       <MobileFrame>
-        <section className="flex flex-1 flex-col px-6 pb-8 pt-6">
-          <Link to="/partner-flow" aria-label="Back to partner wallet" className="flex size-9 items-center justify-center rounded-full text-muted-foreground hover:bg-muted"><ArrowLeft className="size-5" /></Link>
-          <div className="mt-12 flex size-14 items-center justify-center rounded-xl bg-bwi-blue font-display text-sm font-black text-bwi-blue-foreground">BWI</div>
-          <h1 className="mt-7 font-display text-3xl font-extrabold text-navy">Welcome back</h1>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">Log in to manage your wallet and swap to USDT.</p>
-          <div className="mt-9 space-y-4">
-            <label className="block"><span className="mb-2 block text-xs font-bold">Email address</span><input className="h-12 w-full rounded-lg border border-input bg-background px-4 text-sm outline-none focus:border-bwi-blue" placeholder="name@example.com" /></label>
-            <label className="block"><span className="mb-2 block text-xs font-bold">Password</span><span className="relative block"><input type={showPassword ? "text" : "password"} className="h-12 w-full rounded-lg border border-input bg-background px-4 pr-12 text-sm outline-none focus:border-bwi-blue" placeholder="Enter password" /><Button variant="ghost" onClick={() => setShowPassword((value) => !value)} className="absolute right-2 top-1/2 size-9 min-h-0 -translate-y-1/2 p-0" aria-label="Toggle password visibility"><Eye className="size-4" /></Button></span></label>
-          </div>
-          <button className="mt-4 self-end text-xs font-semibold text-bwi-blue">Forgot password?</button>
-          <Button onClick={() => setScreen("home")} className="mt-auto w-full bg-bwi-blue py-3.5 text-bwi-blue-foreground hover:bg-bwi-blue/90">Log in to BWI</Button>
-          <p className="mt-4 text-center text-xs text-muted-foreground">Secure access for {partnerName} users</p>
+        <section className="relative flex flex-1 flex-col bg-login-surface px-5 pb-6 pt-5 sm:px-6">
+          <Link to="/partner-flow" aria-label="Back to partner wallet" className="absolute left-5 top-5 flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-card"><ArrowLeft className="size-5" /></Link>
+          <div className="mx-auto mt-10 flex items-center font-display text-[42px] font-extrabold leading-none text-login-navy" aria-label="BWI"><span>B</span><span className="relative mx-0.5 size-9 rounded-full border-[7px] border-login-cyan border-r-login-blue" /><span>WI</span></div>
+          <h1 className="mt-4 text-center font-display text-[22px] font-extrabold text-login-navy">Welcome Back to Sign in</h1>
+          <p className="mx-auto mt-1 max-w-[320px] text-center text-sm leading-5 text-muted-foreground">Your account is protected with encrypted login and advanced authentication.</p>
+
+          <form className="mt-7" onSubmit={(event) => { event.preventDefault(); setScreen("home"); }}>
+            <label className="block"><span className="mb-2 block text-xs font-semibold text-login-navy">Email</span><span className="relative block"><Mail className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><input type="email" className="h-12 w-full rounded-xl border border-input bg-card pl-11 pr-4 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus:border-login-blue focus:ring-2 focus:ring-login-blue/15" placeholder="Enter your email" /></span></label>
+            <label className="mt-5 block"><span className="mb-2 block text-xs font-semibold text-login-navy">Password</span><span className="relative block"><LockKeyhole className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><input type={showPassword ? "text" : "password"} className="h-12 w-full rounded-xl border border-input bg-card pl-11 pr-12 text-sm outline-none transition-shadow placeholder:text-muted-foreground focus:border-login-blue focus:ring-2 focus:ring-login-blue/15" placeholder="Enter Password" /><Button type="button" variant="ghost" onClick={() => setShowPassword((value) => !value)} className="absolute right-2 top-1/2 size-9 min-h-0 -translate-y-1/2 p-0" aria-label="Toggle password visibility">{showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}</Button></span></label>
+            <div className="mt-2 flex items-center justify-between gap-3"><label className="flex items-center gap-2 text-[11px] text-muted-foreground"><input type="checkbox" className="size-4 rounded border-input accent-login-blue" />Remember me</label><Button type="button" variant="ghost" className="min-h-0 p-0 text-[11px] text-login-blue hover:bg-transparent hover:text-login-navy">Forgot Password?</Button></div>
+            <Button type="submit" className="mt-5 w-full bg-login-blue py-3.5 text-login-blue-foreground shadow-login-button hover:bg-login-blue/90">Login</Button>
+          </form>
+
+          <div className="relative my-7 flex items-center"><span className="h-px flex-1 bg-border" /><span className="px-3 text-[11px] text-muted-foreground">Link your partner account</span><span className="h-px flex-1 bg-border" /></div>
+          <div className="space-y-3"><Button variant="navy" onClick={() => setScreen("home")} className="w-full py-3.5"><span className="grid grid-cols-2 gap-0.5"><i className="size-2.5 rounded-sm bg-login-cyan" /><i className="size-2.5 rounded-sm bg-card" /><i className="size-2.5 rounded-sm bg-card" /><i className="size-2.5 rounded-sm bg-login-cyan" /></span>CardGoal</Button><Button onClick={() => setScreen("home")} className="w-full bg-login-partner py-3.5 text-login-blue-foreground hover:bg-login-partner/90"><span className="font-display text-xl font-black">M</span>CardMax</Button></div>
+          <p className="mt-5 text-center text-xs text-login-navy">Don’t have an account? <Button type="button" variant="ghost" className="inline min-h-0 p-0 text-xs text-login-blue hover:bg-transparent">Sign up</Button></p>
+          <p className="mt-auto pt-5 text-center text-[11px] text-muted-foreground"><Button type="button" variant="ghost" className="inline min-h-0 p-0 text-[11px] text-login-blue hover:bg-transparent">Terms &amp; Conditions</Button> and <Button type="button" variant="ghost" className="inline min-h-0 p-0 text-[11px] text-login-blue hover:bg-transparent">Privacy Policy</Button></p>
         </section>
       </MobileFrame>
     );
