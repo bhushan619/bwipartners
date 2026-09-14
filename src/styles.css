@@ -5,8 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Cobit design system — light, clean fintech.
- * Fresh mint-tinted neutrals, deep emerald primary, lime accent.
+ * BWI design system — neutral, professional fintech.
  */
 
 @theme inline {
@@ -41,34 +40,40 @@
   --color-lime-pop: var(--lime-pop);
   --color-naira: var(--naira);
   --color-tbay: var(--tbay);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
 }
 
 @theme {
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 1px 2px oklch(0.24 0.04 263 / 0.05), 0 8px 24px -18px oklch(0.24 0.04 263 / 0.18);
+  --shadow-frame: 0 24px 60px -24px oklch(0.2 0.08 263 / 0.22);
 }
 
 :root {
-  --radius: 1rem;
-  --background: oklch(0.977 0.006 155);
-  --foreground: oklch(0.24 0.035 165);
+  --radius: 0.5rem;
+  --background: oklch(0.99 0.002 250);
+  --foreground: oklch(0.25 0.03 263);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.035 165);
+  --card-foreground: oklch(0.25 0.03 263);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.035 165);
-  --primary: oklch(0.51 0.115 163);
-  --primary-foreground: oklch(0.985 0.01 155);
-  --secondary: oklch(0.945 0.02 155);
-  --secondary-foreground: oklch(0.32 0.05 163);
-  --muted: oklch(0.955 0.01 155);
-  --muted-foreground: oklch(0.52 0.025 160);
-  --accent: oklch(0.92 0.09 120);
-  --accent-foreground: oklch(0.3 0.06 140);
+  --popover-foreground: oklch(0.25 0.03 263);
+  --primary: oklch(0.72 0.19 145);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.01 250);
+  --secondary-foreground: oklch(0.3 0.08 263);
+  --muted: oklch(0.965 0.008 250);
+  --muted-foreground: oklch(0.52 0.025 263);
+  --accent: oklch(0.94 0.055 145);
+  --accent-foreground: oklch(0.35 0.1 145);
   --destructive: oklch(0.577 0.215 27);
   --destructive-foreground: oklch(0.985 0.01 155);
-  --border: oklch(0.915 0.012 155);
-  --input: oklch(0.915 0.012 155);
-  --ring: oklch(0.51 0.115 163);
+  --border: oklch(0.9 0.012 250);
+  --input: oklch(0.9 0.012 250);
+  --ring: oklch(0.45 0.11 263);
+  --navy: oklch(0.31 0.12 263);
+  --navy-foreground: oklch(0.99 0 0);
   --mint: oklch(0.94 0.045 160);
   --lime-pop: oklch(0.86 0.18 115);
   --naira: oklch(0.55 0.14 145);
