@@ -6,6 +6,8 @@ export interface PartnerConfig {
   currency: string;
   brandingLabel: string;
   enabled: boolean;
+  logo: string;
+  loginUrl: string;
 }
 
 export interface MatrixApp {
@@ -30,6 +32,8 @@ const initialPartner: PartnerConfig = {
   currency: "[CCY]",
   brandingLabel: "[Partner]",
   enabled: true,
+  logo: "",
+  loginUrl: "",
 };
 
 const initialApps: MatrixApp[] = [
