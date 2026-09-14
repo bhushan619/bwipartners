@@ -36,7 +36,7 @@ const sections = [
     to: "/user-flow" as const,
     number: "02",
     title: "BWI User Flow",
-    description: "Continue into BWI to review protection, swap local currency, sign in and complete.",
+    description: "Log in to BWI, view the wallet home, swap local currency, and return home after completion.",
     icon: Smartphone,
     label: "BWI experience",
   },

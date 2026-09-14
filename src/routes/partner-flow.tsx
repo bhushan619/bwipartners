@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Check, ChevronRight, Eye, Home, ReceiptText, WalletCards, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ChevronRight, Eye, Home, ReceiptText, RefreshCw, WalletCards, X } from "lucide-react";
 import { useState } from "react";
 import { Button, MobileFrame } from "@/components/BwiUi";
 import { useBwi } from "@/lib/bwi-store";
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/partner-flow")({
 const records = [
   { label: "Wallet funding", date: "14 Sep, 11:25 AM", amount: "+ 5,453.24", positive: true },
   { label: "Wallet funding", date: "13 Sep, 04:12 PM", amount: "+ 2,800.00", positive: true },
-  { label: "USDT withdrawal", date: "12 Sep, 02:30 PM", amount: "− 10,000.00", positive: false },
+  { label: "Naira swapped successfully", date: "12 Sep, 02:30 PM", amount: "− 10,000.00", positive: false },
 ];
 
 function PartnerFlow() {
@@ -40,6 +40,11 @@ function PartnerFlow() {
 
       <section className="relative flex flex-1 flex-col px-5 pb-4 pt-3">
         <h1 className="font-display text-2xl font-extrabold text-navy">Wallet</h1>
+        <Link to="/user-flow" className="mt-5 flex items-center gap-3 rounded-xl bg-bwi-blue p-4 text-bwi-blue-foreground shadow-card">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-bwi-blue-foreground/15"><RefreshCw className="size-5" /></span>
+          <span className="min-w-0 flex-1"><span className="block text-sm font-bold">Swap Naira to USDT with BWI</span><span className="mt-1 block text-xs text-bwi-blue-foreground/75">Securely continue in your BWI wallet</span></span>
+          <ArrowRight className="size-5 shrink-0" />
+        </Link>
         <div className="relative mt-5 rounded-3xl bg-navy p-6 pb-5 text-navy-foreground shadow-frame after:absolute after:-bottom-2 after:left-3 after:right-3 after:-z-10 after:h-12 after:rounded-b-3xl after:bg-primary">
           <div className="flex items-center justify-between text-sm text-navy-foreground/70"><span>Available Balance</span><Eye className="size-4" /></div>
           <div className="mt-3 flex items-end gap-2"><span className="font-display text-4xl font-extrabold">86,762</span><span className="mb-1 text-sm font-semibold">{currency}</span></div>
@@ -71,7 +76,7 @@ function PartnerFlow() {
         <div className="absolute inset-0 z-20 flex items-end bg-foreground/45">
           <div className="w-full rounded-t-3xl bg-background p-6 shadow-frame">
             <div className="flex items-start justify-between"><div><p className="text-sm font-semibold">Transaction Status</p><p className="mt-1 flex items-center gap-1 text-lg font-bold text-primary"><Check className="size-4" />Successful</p></div><Button variant="ghost" aria-label="Close transaction status" onClick={() => setShowStatus(false)} className="size-9 min-h-0 p-0"><X className="size-5" /></Button></div>
-            <div className="mt-6 flex items-center gap-3"><span className="flex size-11 items-center justify-center rounded-full bg-navy text-xs font-black text-navy-foreground">BWI</span><div><p className="text-sm font-bold">Local currency swapped successfully</p><p className="mt-1 text-xs text-muted-foreground">12 Sep, 02:30 PM</p></div></div>
+            <div className="mt-6 flex items-center gap-3"><span className="flex size-11 items-center justify-center rounded-full bg-navy text-xs font-black text-navy-foreground">BWI</span><div><p className="text-sm font-bold">Naira swapped successfully</p><p className="mt-1 text-xs text-muted-foreground">12 Sep, 02:30 PM</p></div></div>
             <div className="mt-6 flex items-center justify-between border-t border-border pt-5"><div><p className="text-xs text-muted-foreground">Swapped amount</p><p className="mt-1 font-bold text-destructive">− 10,000 {currency}</p></div><Link to="/user-flow" className="rounded-full bg-navy px-5 py-2.5 text-xs font-bold text-navy-foreground">Open BWI</Link></div>
           </div>
         </div>
