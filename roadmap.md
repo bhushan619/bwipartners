@@ -13,3 +13,5 @@
 - [x] Rebuild Partner Configurations as a partner exchange table
 - [x] Keep Add Partner as a modal action
 - [x] Verify table editing and partner creation
+- [x] Replace inline editing with a detailed configuration modal
+- [x] Add mock rate change history to the edit modal

@@ -36,13 +36,21 @@ const initialRows: ExchangeRow[] = [
 
 const inputClass = "mt-2 h-11 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus:border-navy focus:ring-2 focus:ring-navy/10";
 
+const rateHistory = [
+  { date: "2026-09-09", time: "15:01:44", changedBy: "Tommy", oldRate: "1370.0000", newRate: "1368.0000", marketPrice: "1321.9288", ipAddress: "115.204.133.217" },
+  { date: "2026-09-09", time: "15:01:37", changedBy: "Tommy", oldRate: "1370.0000", newRate: "1368.0000", marketPrice: "1321.9288", ipAddress: "115.204.133.217" },
+  { date: "2026-09-05", time: "13:05:41", changedBy: "Tommy", oldRate: "1374.0000", newRate: "1370.0000", marketPrice: "1321.9265", ipAddress: "222.252.48.115" },
+  { date: "2026-09-05", time: "13:05:34", changedBy: "Tommy", oldRate: "1374.0000", newRate: "1370.0000", marketPrice: "1321.9265", ipAddress: "222.252.48.115" },
+  { date: "2026-09-03", time: "13:36:52", changedBy: "Tommy", oldRate: "1377.0000", newRate: "1374.0000", marketPrice: "1327.9419", ipAddress: "222.252.48.115" },
+];
+
 function BwiAdmin() {
   const { partner, savePartner } = useBwi();
   const [form, setForm] = useState<PartnerConfig>(partner);
   const [rows, setRows] = useState(initialRows);
   const [modalOpen, setModalOpen] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingRow, setEditingRow] = useState<ExchangeRow | null>(null);
 
   const openModal = () => {
     setForm({ name: "", code: "", currency: "NGN", brandingLabel: "", enabled: true });
@@ -74,8 +82,10 @@ function BwiAdmin() {
     setModalOpen(false);
   };
 
-  const updateRow = (id: number, key: keyof ExchangeRow, value: string | boolean) => {
-    setRows((current) => current.map((row) => row.id === id ? { ...row, [key]: value } : row));
+  const saveEditedRow = () => {
+    if (!editingRow) return;
+    setRows((current) => current.map((row) => row.id === editingRow.id ? editingRow : row));
+    setEditingRow(null);
   };
 
   return (
@@ -98,19 +108,23 @@ function BwiAdmin() {
           <div className="mt-7 overflow-x-auto border border-border bg-card shadow-card">
             <table className="w-full min-w-[1180px] text-left text-xs">
               <thead className="border-b border-border bg-muted/60"><tr>{["Serial Number", "App Name", "Exchange Pair", "Market Rate", "User Rate", "Min Withdrawal Amount", "Max Withdrawal Amount", "Max Daily Withdrawals", "Status", "Actions"].map((label) => <th key={label} className="whitespace-nowrap px-4 py-4 font-semibold text-foreground">{label}</th>)}</tr></thead>
-              <tbody className="divide-y divide-border">{rows.map((row) => {
-                const editing = editingId === row.id;
-                const editable = (key: keyof ExchangeRow, value: string, width = "w-36") => editing ? <input aria-label={`${row.appName} ${key}`} value={value} onChange={(event) => updateRow(row.id, key, event.target.value)} className={`h-8 rounded border border-input px-2 outline-none focus:border-bwi-blue ${width}`} /> : value;
-                return <tr key={row.id} className="hover:bg-muted/35"><td className="px-4 py-4">{row.id}</td><td className="px-4 py-4 font-semibold text-navy">{editable("appName", row.appName, "w-28")}</td><td className="px-4 py-4">{editable("pair", row.pair, "w-28")}</td><td className="whitespace-nowrap px-4 py-4">{editable("marketRate", row.marketRate, "w-44")}</td><td className="whitespace-nowrap px-4 py-4">{editable("userRate", row.userRate, "w-44")}</td><td className="px-4 py-4">{editable("minimum", row.minimum, "w-24")}</td><td className="px-4 py-4">{editable("maximum", row.maximum, "w-28")}</td><td className="px-4 py-4">{editable("dailyLimit", row.dailyLimit, "w-20")}</td><td className="px-4 py-4"><button onClick={() => updateRow(row.id, "enabled", !row.enabled)} className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${row.enabled ? "bg-accent text-accent-foreground" : "bg-warning text-warning-foreground"}`}>{row.enabled && <Check className="size-3" />}{row.enabled ? "Publish" : "Disabled"}</button></td><td className="px-4 py-4"><Button variant={editing ? "primary" : "ghost"} onClick={() => setEditingId(editing ? null : row.id)} className="min-h-8 px-3"><Pencil className="size-3.5" />{editing ? "Save" : "Edit"}</Button></td></tr>;
-              })}</tbody>
+              <tbody className="divide-y divide-border">{rows.map((row) => <tr key={row.id} className="hover:bg-muted/35"><td className="px-4 py-4">{row.id}</td><td className="px-4 py-4 font-semibold text-navy">{row.appName}</td><td className="px-4 py-4">{row.pair}</td><td className="whitespace-nowrap px-4 py-4">{row.marketRate}</td><td className="whitespace-nowrap px-4 py-4">{row.userRate}</td><td className="px-4 py-4">{row.minimum}</td><td className="px-4 py-4">{row.maximum}</td><td className="px-4 py-4">{row.dailyLimit}</td><td className="px-4 py-4"><span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${row.enabled ? "bg-accent text-accent-foreground" : "bg-warning text-warning-foreground"}`}>{row.enabled && <Check className="size-3" />}{row.enabled ? "Publish" : "Disabled"}</span></td><td className="px-4 py-4"><Button variant="ghost" onClick={() => setEditingRow({ ...row })} className="min-h-8 px-3"><Pencil className="size-3.5" />Edit</Button></td></tr>)}</tbody>
             </table>
           </div>
           <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground"><p>Per-partner configuration — no code deployment required.</p><p>1–{rows.length} of {rows.length} items</p></div>
         </section>
       </div>
       {modalOpen && <AddPartnerModal form={form} setForm={setForm} onSave={submit} onClose={() => setModalOpen(false)} />}
+      {editingRow && <EditConfigurationModal row={editingRow} setRow={setEditingRow} onSave={saveEditedRow} onClose={() => setEditingRow(null)} />}
     </AdminShell>
   );
+}
+
+function EditConfigurationModal({ row, setRow, onSave, onClose }: { row: ExchangeRow; setRow: (row: ExchangeRow) => void; onSave: () => void; onClose: () => void }) {
+  const update = (key: keyof ExchangeRow, value: string | boolean) => setRow({ ...row, [key]: value });
+  const numericField = (key: "minimum" | "maximum" | "dailyLimit" | "userRate", label: string, value: string) => <label className="block"><span className="text-sm"><span className="mr-1 text-destructive">*</span>{label}</span><input aria-label={label} value={value.replace("1 USDT = ", "").replaceAll(",", "")} onChange={(event) => update(key, key === "userRate" ? `1 USDT = ${event.target.value}` : event.target.value)} className={inputClass} inputMode="decimal" /></label>;
+
+  return <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/55 p-4" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><div role="dialog" aria-modal="true" aria-labelledby="edit-configuration-title" className="flex max-h-[calc(100vh-2rem)] w-full max-w-[1280px] flex-col overflow-hidden rounded-md border border-border bg-card shadow-frame"><div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-6"><h2 id="edit-configuration-title" className="font-display text-lg font-semibold">Edit {row.appName}</h2><Button variant="ghost" onClick={onClose} aria-label="Close edit configuration" className="size-9 min-h-0 p-0"><X className="size-5" /></Button></div><div className="grid min-h-0 flex-1 overflow-y-auto lg:grid-cols-[420px_minmax(0,1fr)]"><div className="space-y-7 border-b border-border p-6 lg:border-b-0 lg:border-r"><div><p className="text-sm font-medium">Current Market Rate</p><p className="mt-3 text-sm">{row.marketRate} {row.pair.split("/")[1]}</p></div>{numericField("minimum", "Min Withdrawal Amount", row.minimum)}{numericField("maximum", "Max Withdrawal Amount", row.maximum)}{numericField("dailyLimit", "Max Daily Withdrawals", row.dailyLimit)}<div>{numericField("userRate", "User Exchange Rate", row.userRate)}<p className="mt-2 text-sm text-muted-foreground">Allowed Rate Range: ±20%</p></div><div><p className="text-sm">Status</p><button type="button" role="switch" aria-checked={row.enabled} aria-label="Configuration status" onClick={() => update("enabled", !row.enabled)} className={`mt-4 flex h-6 w-12 items-center rounded-full p-0.5 transition-colors ${row.enabled ? "bg-bwi-blue justify-end" : "bg-border justify-start"}`}><span className="size-5 rounded-full bg-card shadow-card" /></button></div></div><div className="min-w-0 p-6"><h3 className="font-display text-lg font-bold">Rate Change History</h3><div className="mt-5 overflow-x-auto"><table className="w-full min-w-[760px] text-left text-sm"><thead className="bg-muted"><tr>{["Date/Time", "Changed By", "Old Rate", "New Rate", "Market Price at Change", "IP Address"].map((heading) => <th key={heading} className="px-3 py-4 font-medium">{heading}</th>)}</tr></thead><tbody className="divide-y divide-border">{rateHistory.map((history, index) => <tr key={`${history.date}-${history.time}-${index}`}><td className="px-3 py-4"><span className="block">{history.date}</span><span className="mt-1 block">{history.time}</span></td><td className="px-3 py-4">{history.changedBy}</td><td className="px-3 py-4">{history.oldRate}</td><td className="px-3 py-4">{history.newRate}</td><td className="px-3 py-4">{history.marketPrice}</td><td className="px-3 py-4">{history.ipAddress}</td></tr>)}</tbody></table></div></div></div><div className="flex shrink-0 justify-end gap-3 border-t border-border px-6 py-3"><Button variant="outline" onClick={onClose}>Cancel</Button><Button onClick={onSave}><Save className="size-4" />Save</Button></div></div></div>;
 }
 
 function AddPartnerModal({ form, setForm, onSave, onClose }: { form: PartnerConfig; setForm: (form: PartnerConfig) => void; onSave: () => void; onClose: () => void }) {
