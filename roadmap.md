@@ -15,3 +15,7 @@
 - [x] Verify table editing and partner creation
 - [x] Replace inline editing with a detailed configuration modal
 - [x] Add mock rate change history to the edit modal
+- [x] Restyle SaaS Admin as a desktop management console
+- [x] Rename Connection overview to Partner Linking
+- [x] Move connection management into a modal
+- [x] Replace currency and placement fields with a deeplink URL

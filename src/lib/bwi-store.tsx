@@ -14,7 +14,7 @@ export interface MatrixApp {
   currency: string;
   status: "Connected" | "Not connected" | "Disabled";
   partnerCode: string;
-  placement: "Wallet screen" | "Withdraw menu" | "Home";
+  deeplinkUrl: string;
 }
 
 interface BwiState {
@@ -39,7 +39,7 @@ const initialApps: MatrixApp[] = [
     currency: "NGN",
     status: "Connected",
     partnerCode: "CG",
-    placement: "Withdraw menu",
+    deeplinkUrl: "https://cardgoal.app/wallet/bwi",
   },
   {
     id: "tbay",
@@ -47,7 +47,7 @@ const initialApps: MatrixApp[] = [
     currency: "GHS",
     status: "Disabled",
     partnerCode: "TB",
-    placement: "Wallet screen",
+    deeplinkUrl: "https://tbay.app/wallet/bwi",
   },
   {
     id: "new-partner",
@@ -55,7 +55,7 @@ const initialApps: MatrixApp[] = [
     currency: "[CCY]",
     status: "Not connected",
     partnerCode: "",
-    placement: "Wallet screen",
+    deeplinkUrl: "",
   },
 ];
 
