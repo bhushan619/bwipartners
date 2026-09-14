@@ -40,6 +40,8 @@
   --color-lime-pop: var(--lime-pop);
   --color-naira: var(--naira);
   --color-tbay: var(--tbay);
+  --color-bwi-blue: var(--bwi-blue);
+  --color-bwi-blue-foreground: var(--bwi-blue-foreground);
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
   --color-warning: var(--warning);
@@ -82,6 +84,8 @@
   --lime-pop: oklch(0.86 0.18 115);
   --naira: oklch(0.55 0.14 145);
   --tbay: oklch(0.62 0.16 75);
+  --bwi-blue: oklch(0.58 0.2 252);
+  --bwi-blue-foreground: oklch(0.99 0 0);
 }
 
 @layer base {

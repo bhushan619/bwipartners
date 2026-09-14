@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BwiAdminRouteImport } from './routes/bwi-admin'
+import { Route as PartnerFlowRouteImport } from './routes/partner-flow'
 import { Route as SaasRouteImport } from './routes/saas'
 import { Route as UserFlowRouteImport } from './routes/user-flow'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const BwiAdminRoute = BwiAdminRouteImport.update({
   id: '/bwi-admin',
   path: '/bwi-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerFlowRoute = PartnerFlowRouteImport.update({
+  id: '/partner-flow',
+  path: '/partner-flow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SaasRoute = SaasRouteImport.update({
@@ -38,12 +44,14 @@ const UserFlowRoute = UserFlowRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bwi-admin': typeof BwiAdminRoute
+  '/partner-flow': typeof PartnerFlowRoute
   '/saas': typeof SaasRoute
   '/user-flow': typeof UserFlowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bwi-admin': typeof BwiAdminRoute
+  '/partner-flow': typeof PartnerFlowRoute
   '/saas': typeof SaasRoute
   '/user-flow': typeof UserFlowRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bwi-admin': typeof BwiAdminRoute
+  '/partner-flow': typeof PartnerFlowRoute
   '/saas': typeof SaasRoute
   '/user-flow': typeof UserFlowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bwi-admin' | '/saas' | '/user-flow'
+  fullPaths: '/' | '/bwi-admin' | '/partner-flow' | '/saas' | '/user-flow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bwi-admin' | '/saas' | '/user-flow'
-  id: '__root__' | '/' | '/bwi-admin' | '/saas' | '/user-flow'
+  to: '/' | '/bwi-admin' | '/partner-flow' | '/saas' | '/user-flow'
+  id: '__root__' | '/' | '/bwi-admin' | '/partner-flow' | '/saas' | '/user-flow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BwiAdminRoute: typeof BwiAdminRoute
+  PartnerFlowRoute: typeof PartnerFlowRoute
   SaasRoute: typeof SaasRoute
   UserFlowRoute: typeof UserFlowRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/bwi-admin'
       fullPath: '/bwi-admin'
       preLoaderRoute: typeof BwiAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner-flow': {
+      id: '/partner-flow'
+      path: '/partner-flow'
+      fullPath: '/partner-flow'
+      preLoaderRoute: typeof PartnerFlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/saas': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BwiAdminRoute: BwiAdminRoute,
+  PartnerFlowRoute: PartnerFlowRoute,
   SaasRoute: SaasRoute,
   UserFlowRoute: UserFlowRoute,
 }
