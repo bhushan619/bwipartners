@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Eye, Home, ReceiptText, RefreshCw, WalletCards, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, MobileFrame } from "@/components/BwiUi";
+import { FirstSwapModal } from "@/components/FirstSwapModal";
 import { useBwi } from "@/lib/bwi-store";
 
 export const Route = createFileRoute("/partner-flow")({
@@ -27,8 +28,14 @@ const records = [
 function PartnerFlow() {
   const { partner } = useBwi();
   const [showStatus, setShowStatus] = useState(false);
+  const [showFirstSwap, setShowFirstSwap] = useState(false);
   const partnerName = partner.brandingLabel || partner.name || "[Partner]";
   const currency = partner.currency || "[CCY]";
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowFirstSwap(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <MobileFrame>
@@ -81,6 +88,14 @@ function PartnerFlow() {
           </div>
         </div>
       )}
+
+      <FirstSwapModal
+        partnerName={partnerName}
+        currency={currency}
+        isOpen={showFirstSwap}
+        onSwap={() => setShowFirstSwap(false)}
+        onDismiss={() => setShowFirstSwap(false)}
+      />
     </MobileFrame>
   );
 }
