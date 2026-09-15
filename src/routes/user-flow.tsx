@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowLeft, Bell, Bitcoin, Check, ChevronRight, CircleDollarSign, Eye, EyeOff, Gem, Home, LockKeyhole, Mail, ReceiptText, RefreshCw, WalletCards } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, MobileFrame } from "@/components/BwiUi";
+import { FirstSwapModal } from "@/components/FirstSwapModal";
 import { useBwi } from "@/lib/bwi-store";
 
 export const Route = createFileRoute("/user-flow")({
@@ -23,9 +24,27 @@ function BwiUserFlow() {
   const [screen, setScreen] = useState<"login" | "home" | "swap" | "complete">("login");
   const [showPassword, setShowPassword] = useState(false);
   const [amount, setAmount] = useState("10000");
+  const [showFirstSwap, setShowFirstSwap] = useState(false);
+  const [firstSwapHandled, setFirstSwapHandled] = useState(false);
   const partnerName = partner.name || "[Partner]";
   const currency = partner.currency || "[CCY]";
   const received = amount ? (Number(amount) / 1400).toFixed(2) : "0.00";
+
+  useEffect(() => {
+    if (screen !== "home" || firstSwapHandled) return;
+    const timer = setTimeout(() => setShowFirstSwap(true), 800);
+    return () => clearTimeout(timer);
+  }, [screen, firstSwapHandled]);
+
+  const dismissFirstSwap = () => {
+    setShowFirstSwap(false);
+    setFirstSwapHandled(true);
+  };
+
+  const startFirstSwap = () => {
+    dismissFirstSwap();
+    setScreen("swap");
+  };
 
   if (screen === "login") {
     return (
@@ -82,6 +101,13 @@ function BwiUserFlow() {
           </div>
           <nav className="mt-auto grid grid-cols-3 border-t border-border pt-3 text-[11px] font-semibold text-muted-foreground"><span className="flex flex-col items-center gap-1 text-bwi-blue"><Home className="size-5" />Home</span><span className="flex flex-col items-center gap-1"><ReceiptText className="size-5" />Orders</span><span className="flex flex-col items-center gap-1"><WalletCards className="size-5" />Wallet</span></nav>
         </section>
+        <FirstSwapModal
+          partnerName={partnerName}
+          currency={currency}
+          isOpen={showFirstSwap}
+          onSwap={startFirstSwap}
+          onDismiss={dismissFirstSwap}
+        />
       </MobileFrame>
     );
   }
