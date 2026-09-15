@@ -61,7 +61,7 @@ function BwiAdmin() {
     const nextPartner = {
       ...form,
       name: form.name.trim() || "[Partner]",
-      currency: form.currency.trim() || "[CCY]",
+      currency: form.currency.trim() || "Naira",
     };
     savePartner(nextPartner);
     setRows((current) => [

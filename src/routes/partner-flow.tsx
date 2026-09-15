@@ -28,7 +28,7 @@ function PartnerFlow() {
   const { partner } = useBwi();
   const [showStatus, setShowStatus] = useState(false);
   const partnerName = partner.brandingLabel || partner.name || "[Partner]";
-  const currency = partner.currency || "[CCY]";
+  const currency = partner.currency || "Naira";
 
   return (
     <MobileFrame>
