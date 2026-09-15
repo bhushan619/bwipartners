@@ -54,7 +54,7 @@ function BwiAdmin() {
   const [editingRow, setEditingRow] = useState<ExchangeRow | null>(null);
 
   const openModal = () => {
-    setForm({ name: "", code: "", currency: "NGN", brandingLabel: "", enabled: true, logo: "", loginUrl: "" });
+    setForm({ name: "", code: "", currency: "NGN", brandingLabel: "", enabled: true, logo: "", loginUrl: "", displayOrder: String(rows.length + 1) });
     setModalOpen(true);
   };
 
