@@ -8,6 +8,7 @@ export interface PartnerConfig {
   enabled: boolean;
   logo: string;
   loginUrl: string;
+  displayOrder: string;
 }
 
 export interface MatrixApp {
@@ -34,6 +35,7 @@ const initialPartner: PartnerConfig = {
   enabled: true,
   logo: "",
   loginUrl: "",
+  displayOrder: "",
 };
 
 const initialApps: MatrixApp[] = [
