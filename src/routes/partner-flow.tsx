@@ -28,8 +28,14 @@ const records = [
 function PartnerFlow() {
   const { partner } = useBwi();
   const [showStatus, setShowStatus] = useState(false);
+  const [showFirstSwap, setShowFirstSwap] = useState(false);
   const partnerName = partner.brandingLabel || partner.name || "[Partner]";
   const currency = partner.currency || "[CCY]";
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowFirstSwap(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <MobileFrame>
