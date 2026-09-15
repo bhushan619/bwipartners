@@ -25,13 +25,14 @@ interface ExchangeRow {
   minimum: string;
   maximum: string;
   dailyLimit: string;
+  displayOrder: string;
   enabled: boolean;
 }
 
 const initialRows: ExchangeRow[] = [
-  { id: 3, appName: "Cardmax", pair: "USDT/NGN", marketRate: "1 USDT = 1,324.71984816", userRate: "1 USDT = 1,368.00000000", minimum: "3,000", maximum: "1,000,000", dailyLimit: "100", enabled: true },
-  { id: 2, appName: "Cardgoal", pair: "USDT/NGN", marketRate: "1 USDT = 1,324.71984816", userRate: "1 USDT = 1,368.00000000", minimum: "3,000", maximum: "1,000,000", dailyLimit: "100", enabled: true },
-  { id: 1, appName: "Tbay", pair: "USDT/Point", marketRate: "1 USDT = 0.83246073", userRate: "1 USDT = 0.70000000", minimum: "10", maximum: "1,000", dailyLimit: "100", enabled: true },
+  { id: 3, appName: "Cardmax", pair: "USDT/NGN", marketRate: "1 USDT = 1,324.71984816", userRate: "1 USDT = 1,368.00000000", minimum: "3,000", maximum: "1,000,000", dailyLimit: "100", displayOrder: "1", enabled: true },
+  { id: 2, appName: "Cardgoal", pair: "USDT/NGN", marketRate: "1 USDT = 1,324.71984816", userRate: "1 USDT = 1,368.00000000", minimum: "3,000", maximum: "1,000,000", dailyLimit: "100", displayOrder: "2", enabled: true },
+  { id: 1, appName: "Tbay", pair: "USDT/Point", marketRate: "1 USDT = 0.83246073", userRate: "1 USDT = 0.70000000", minimum: "10", maximum: "1,000", dailyLimit: "100", displayOrder: "3", enabled: true },
 ];
 
 const inputClass = "mt-2 h-11 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none focus:border-navy focus:ring-2 focus:ring-navy/10";
