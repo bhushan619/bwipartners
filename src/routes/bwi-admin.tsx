@@ -75,6 +75,7 @@ function BwiAdmin() {
         minimum: "3,000",
         maximum: "1,000,000",
         dailyLimit: "100",
+        displayOrder: nextPartner.displayOrder || String(current.length + 1),
         enabled: nextPartner.enabled,
       },
       ...current,
