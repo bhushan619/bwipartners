@@ -29,7 +29,7 @@ interface BwiState {
 const initialPartner: PartnerConfig = {
   name: "[Partner]",
   code: "",
-  currency: "[CCY]",
+  currency: "Naira",
   brandingLabel: "[Partner]",
   enabled: true,
   logo: "",
@@ -56,7 +56,7 @@ const initialApps: MatrixApp[] = [
   {
     id: "new-partner",
     name: "New Partner App",
-    currency: "[CCY]",
+    currency: "Naira",
     status: "Not connected",
     partnerCode: "",
     deeplinkUrl: "",
@@ -77,7 +77,7 @@ export function BwiProvider({ children }: { children: ReactNode }) {
           ? {
               ...app,
               name: nextPartner.name || "[Partner]",
-              currency: nextPartner.currency || "[CCY]",
+              currency: nextPartner.currency || "Naira",
               partnerCode: nextPartner.code,
               status: nextPartner.enabled ? app.status : "Disabled",
             }

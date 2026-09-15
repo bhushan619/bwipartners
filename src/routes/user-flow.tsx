@@ -27,7 +27,7 @@ function BwiUserFlow() {
   const [showFirstSwap, setShowFirstSwap] = useState(false);
   const [firstSwapHandled, setFirstSwapHandled] = useState(false);
   const partnerName = partner.name || "[Partner]";
-  const currency = partner.currency || "[CCY]";
+  const currency = partner.currency || "Naira";
   const received = amount ? (Number(amount) / 1400).toFixed(2) : "0.00";
 
   useEffect(() => {
