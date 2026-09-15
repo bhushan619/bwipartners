@@ -88,6 +88,14 @@ function PartnerFlow() {
           </div>
         </div>
       )}
+
+      <FirstSwapModal
+        partnerName={partnerName}
+        currency={currency}
+        isOpen={showFirstSwap}
+        onSwap={() => setShowFirstSwap(false)}
+        onDismiss={() => setShowFirstSwap(false)}
+      />
     </MobileFrame>
   );
 }
