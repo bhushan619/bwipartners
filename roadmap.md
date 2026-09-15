@@ -22,3 +22,4 @@
 - [x] Remove the Matrix Apps screen from SaaS Admin
 - [x] Add Partner Transactions to SaaS Admin with filters and mock records
 - [x] Redesign the BWI sign-in screen from the supplied mobile reference
+- [x] Move the first-swap popup from the partner wallet to the BWI home screen
