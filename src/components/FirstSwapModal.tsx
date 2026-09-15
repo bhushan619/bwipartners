@@ -85,7 +85,7 @@ export function FirstSwapModal({ partnerName, currency, isOpen, onSwap, onDismis
         </div>
 
         <h2 id="first-swap-title" className="mt-5 font-display text-xl font-extrabold text-navy">
-          Turn your Naira into digital dollars
+          Turn your Naira into Digital Dollars
         </h2>
 
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
